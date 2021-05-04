@@ -1,0 +1,9 @@
+<div class="stock-details-container">
+    <h3>Stock Detail</h3>
+    <div class="stock-details">
+        <p class="stock-detail">Symbol:  {{stock.symbol}}</p>
+        <p class="stock-detail">Name:  {{stock.name}}</p>
+        <p class="stock-detail">Market Cap:  {{stock.market_cap | marketCap}}</p>
+        <p class="stock-detail">Tag:  {{stock.tag.name | titlecase }}</p>
+    </div>
+</div>

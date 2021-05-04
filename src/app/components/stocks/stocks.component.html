@@ -1,0 +1,5 @@
+<div class="stocks-container">
+    <app-tag-filter (selectedTagEmitter)="selectedTagHandler($event.value)" [tags]="tags"></app-tag-filter>
+    <app-stock-grid [stocks]="stocks" (selectedStockEmitter)="selectedStockHandler($event)"></app-stock-grid>
+    <app-stock-detail *ngIf="selectedStock" [stock]="selectedStock"></app-stock-detail>
+</div>

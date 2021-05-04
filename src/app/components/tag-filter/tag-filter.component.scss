@@ -1,0 +1,8 @@
+mat-option {
+    text-transform: capitalize;
+}
+
+:host {
+    display: flex;
+    flex-direction: row-reverse;
+}

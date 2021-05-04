@@ -1,0 +1,35 @@
+
+.stock-grid-container {
+
+    position: relative;
+    height: 400px;
+    overflow: auto;
+}
+
+
+// making these links obvious
+a {
+    color: blue; 
+    cursor: pointer; 
+    font-weight: bold;
+    text-decoration: underline; 
+}
+
+button {
+    opacity: 0; 
+}
+
+table {
+    width: 100%;
+}
+.mat-row:hover {
+    background-color: rgba(0,0,0,.12);
+    cursor: pointer; 
+    button {
+        opacity: 1;
+    }
+}
+
+td {
+    text-transform: capitalize;
+}
