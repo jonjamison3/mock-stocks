@@ -16,7 +16,7 @@ export class TagFilterComponent implements OnInit {
   ngOnInit(): void {}
 
   selectionChangeHandler(tag: Tag): void {
-    this.selectedTag = tag; 
+    this.selectedTag = tag;
     this.selectedTagEmitter.emit(tag);
   }
 }

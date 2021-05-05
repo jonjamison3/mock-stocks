@@ -1,6 +1,5 @@
 <div class="stock-grid-container">
     <table *ngIf="stocks.length; else emptyMsg" mat-table [dataSource]="stocks" class="mat-elevation-z8">
-  
         <!-- Symbol Column -->
         <ng-container  matColumnDef="symbol">
           <th mat-header-cell *matHeaderCellDef> Symbol </th>
@@ -26,12 +25,12 @@
             <button (click)="deleteHandler(stock)" mat-icon-button color="warn" aria-label="Delete {{stock.name}}">
                 <mat-icon>close</mat-icon>
             </button>
-        </td>
+          </td>
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr (mouseenter)="hoverRow = row"  mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+    </table>
 
       <ng-template #emptyMsg> No stocks found!</ng-template>
 </div>

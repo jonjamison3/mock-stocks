@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Stock } from '../models/stock';
 import { tap } from 'rxjs/operators';
 
-const api_url = 'http://localhost:3000';
+const apiUrl = 'http://localhost:3000';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Tag } from '../models/tag';
@@ -21,45 +21,46 @@ export class StockService {
   tags: BehaviorSubject<Tag[]> = new BehaviorSubject([]);
   tags$: Observable<Tag[]> = this.tags.asObservable();
 
-  mockDeleted: Stock[] = []; 
+  mockDeleted: Stock[] = [];
 
   constructor(public http: HttpClient) { }
 
   clearFilter(): void {
     this.currStocks.next(this.allStocks.getValue().filter(stock => {
-      return this.mockDeleted.indexOf(stock) === -1
+      return this.mockDeleted.indexOf(stock) === -1;
     }));
   }
 
   filterByTag(tag: Tag): void {
     this.currStocks.next(this.allStocks.getValue().filter(existing => {
-      return this.mockDeleted.indexOf(existing) === -1 && (existing.tag.id === tag.id)
-    }))
+      return this.mockDeleted.indexOf(existing) === -1 && (existing.tag.id === tag.id);
+    }));
   }
 
-  getStocks() {
-    return this.http.get<Stock[]>(api_url + '/stocks').pipe(
+  getStocks(): Observable<Stock[]> {
+    return this.http.get<Stock[]>(apiUrl + '/stocks').pipe(
       tap(ev => {
-        this.allStocks.next(ev)
-        this.currStocks.next(ev)
+        this.allStocks.next(ev);
+        this.currStocks.next(ev);
       })
     );
   }
 
-  getTags() {
-    return this.http.get<Tag[]>(api_url + '/tags').pipe(
+  getTags(): Observable<Tag[]> {
+    return this.http.get<Tag[]>(apiUrl + '/tags').pipe(
       tap(ev => {
-        this.tags.next(ev)
+        this.tags.next(ev);
       })
     );
   }
 
-  deleteStock(stock: Stock) {
+  deleteStock(stock: Stock): void {
     this.mockDeleted.push(stock);
     this.currStocks.next(this.currStocks.getValue().filter(curr => curr !== stock));
   }
 
-  resetStocks(includeDeleted = false) {
+  resetStocks(includeDeleted = false): void {
+    // debated enabling 'restore' button function here
     this.mockDeleted = includeDeleted ?  [] : this.mockDeleted;
     this.currStocks.next(this.allStocks.getValue().filter(stock => this.mockDeleted.indexOf(stock) === -1));
   }
