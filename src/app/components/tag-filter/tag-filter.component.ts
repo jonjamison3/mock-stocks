@@ -10,12 +10,12 @@ export class TagFilterComponent implements OnInit {
   @Input() tags: Tag[]; 
   @Output() selectedTagEmitter: EventEmitter<Tag> = new EventEmitter();
 
-  selectedTag: Tag; 
+  selectedTag: Tag;
   constructor() { }
 
   ngOnInit(): void {}
 
-  selectionChangeHandler(tag: Tag) {
+  selectionChangeHandler(tag: Tag): void {
     this.selectedTag = tag; 
     this.selectedTagEmitter.emit(tag);
   }

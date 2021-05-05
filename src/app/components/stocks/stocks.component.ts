@@ -10,23 +10,21 @@ import { StockService } from 'src/app/services/stock.service';
 })
 export class StocksComponent implements OnInit {
   selectedStock: Stock;
-  stocks: Stock[] = []; 
-  tags: Tag[] = []; 
+  stocks: Stock[] = [];
+  tags: Tag[] = [];
 
   constructor(private stockService: StockService) { }
 
   ngOnInit(): void {
-
-    this.stockService.getStocks().subscribe(stocks => {
-      // console.log('init stocks', stocks);
+    this.stockService.currStocks$.subscribe(stocks => {
+      this.stocks = stocks;
+      if (!this.stocks.length) this.stockService.getStocks().subscribe();
     });
 
-    this.stockService.getTags().subscribe(tags => {
-      // console.log('init tags', tags);
+    this.stockService.tags$.subscribe(tags => {
+      this.tags = tags;
+      if (!this.tags.length) this.stockService.getTags().subscribe();
     });
-
-    this.stockService.currStocks$.subscribe(stocks => this.stocks = stocks); 
-    this.stockService.tags$.subscribe(tags => this.tags = tags); 
   }
   
   clearFilter(): void {
@@ -39,10 +37,9 @@ export class StocksComponent implements OnInit {
 
   selectedTagHandler(tag): void {
     if (tag !== undefined) {
-      this.stockService.filterByTag(tag)
+      this.stockService.filterByTag(tag);
     } else {
-      this.stockService.resetStocks()
-    };
-
+      this.stockService.resetStocks();
+    }
   }
 }

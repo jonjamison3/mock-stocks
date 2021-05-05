@@ -12,20 +12,20 @@ import { StockService } from 'src/app/services/stock.service';
 export class StockGridComponent {
   @Input() stocks: Stock[] = [];
   @Input() tags: Tag[] = [];
-  @Output() selectedStockEmitter: EventEmitter<Stock> = new EventEmitter();  
-  
+  @Output() selectedStockEmitter: EventEmitter<Stock> = new EventEmitter();
+
   displayedColumns: string[] = ['symbol', 'last_price', 'tag', 'actions'];
-  selectedStock: Stock; 
+  selectedStock: Stock;
 
   constructor(private stockService: StockService) { }
 
-  deleteHandler(stock: Stock) {
+  deleteHandler(stock: Stock): void {
     this.stockService.deleteStock(stock);
     if (stock === this.selectedStock) this.selectedStockEmitter.emit(null);
   }
 
   emitSelectedStock(stock: Stock): void {
-    this.selectedStock = stock; 
+    this.selectedStock = stock;
     this.selectedStockEmitter.emit(stock);
   }
 }

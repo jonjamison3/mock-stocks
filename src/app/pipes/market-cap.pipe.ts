@@ -6,8 +6,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class MarketCapPipe implements PipeTransform {
 
   transform(value: number): string {
-    let following = ''
-    let result = '$'
+    let following = '';
+    let result = '$';
+
     if (value > 1000000000000) {
       result += (value / 1000000000000).toFixed(1); 
       following = ' T';
